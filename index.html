@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-19</title>
+    <link rel="stylesheet" href="index.css"></link>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    </link>
+</head>
+
+<body class="background">
+    <div class="transbox">
+    <div class="container text-white">
+        <h1 class="text-center mt-5">Covid 19 Global live data</h1>
+        <br><br>
+        <table class="table table-hover text-white">
+            <thead>
+                <tr>
+                    <th>Total Cases</th>
+                    <th>Total Deaths</th>
+                    <th>Total Recovered</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="data">
+                   
+                </tr>
+            </tbody>
+        </table>
+        <button onclick="refreshData()" class="btn btn-danger btn-block mt-5 md-5" style="max-width: 30%;align-items: center;">Refresh Data</button>
+        <h1 class="text-center mt-5">Important Links</h1>
+        <li>
+        <a href="https://www.covid19india.org/" ><h3 class="text-success">covid19india</h3></a>
+        </li>
+        <li>
+        <a href="https://www.cowin.gov.in/home"><h3 class="text-success">cowin</h3></a>
+    </li>
+    <li>
+        <a href="https://www.wbhealth.gov.in/pages/corona/bed_availability_pvt"><h3 class="text-success">West Bengal bed Availability</h3></a>
+        </li>
+    </div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+        init()
+
+
+        function init()
+        {
+            var url="https://api.covid19api.com/summary"
+            var data=''
+            $.get(url,function(data){
+
+                data=`
+                
+                <td><b>${data.Global.TotalConfirmed}</b></td>
+                <td><b>${data.Global.TotalDeaths}</b></td>
+                <td><b>${data.Global.TotalRecovered}</b></td>
+                `
+
+                $("#data").html(data)
+            })
+        }
+        function refreshData(){
+            clearData()
+            init()
+        }
+
+        function clearData(){
+            $("#data").empty()
+            init()
+        }
+</script>
+</html>
